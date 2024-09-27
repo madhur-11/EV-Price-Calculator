@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EV Price Comparison</title>
+    <link rel="stylesheet" href="styles.css">
+    <script defer src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#calc">Calculator</a>
+        <a href="#ref">References</a>
+    </nav>
+    <div class="err" id="err">
+        <h1>Values can't be Empty!!</h1>
+        <p>Please check if you have entered correctly.</p>
+        <button id="close" onclick="errClose()">Close</button>
+    </div>
+    <div class="intro" id="home">
+        <h1><u>Electric Vehicle</u>&#x26A1;</h1>
+        <p>An electric vehicle is any vehicle that is <mark>powered by electricity</mark> rather
+            than traditional fuel based engine. Electric Vehicles generally provide
+            <mark>better fuel efficiency</mark> and amount to <mark>lower emissions</mark> over their entire
+            lifecycle. 
+        </p>
+        <p>Over the recent years, electric vehicles proved to be sufficent for a
+            wider customer base as the development in the EV sector has been making 
+            decent progress.
+        </p>
+        <p>The intention of this project is to provide users with a reference on how
+            the current market will have an impact if they choose either an EV or a 
+            conventional Petrol powered vehicle by using various factors such as Fuel price,
+            Initial Cost, Maintenance Cost, Mileage, Average travelling distance.
+        </p>
+    </div>
+    <div class="calc" id="calc">
+        <div><h1>Price Calculator</h1></div>
+        <div class="inputs">
+            <form class="vehicle" id="vehicle">
+                <!-- Petrol Vehicle Inputs -->
+                <label for="initp">Initial Cost of Ownership of Petrol Vehicle:</label>
+                <input type="number" id="initp" name="init" value="" step="0.01"><br>
+
+                <label for="fp">Fuel Price per Litre:</label>
+                <div class="fpb">
+                    <input type="number" id="fp" name="fp" value="">
+                    <button id="getfp" type="button" onclick="fetchFuelPrices()">Get Fuel Price</button>
+                </div><br>
+
+                <label for="kmpl">Expected Mileage (kmpl):</label>
+                <input type="number" id="kmpl" name="kmpl" value="" step="0.01"><br>
+
+                <label for="maintp">Maintenance cost per 4 years (non EV):</label>
+                <input type="number" id="maintp" value="" step="0.01"><br>
+
+                <!-- EV Inputs -->
+                <label for="inite">Initial Cost of Ownership of EV:</label>
+                <input type="number" id="inite" name="inite" value="" step="0.01"><br>
+
+                <label for="pc">Price per KWHr:</label>
+                <input type="number" id="pc" name="pc" value="" step="0.01"><br>
+
+                <label for="range">Expected Range per KWHr:</label>
+                <input type="number" id="range" name="range" value="" step="0.01"><br>
+
+                <label for="mainte">Maintenance cost per 4 years (EV):</label>
+                <input type="number" id="mainte" value="" step="0.01"><br>
+
+                <label for="dist">Average travelling distance per day (Km):</label>
+                <input type="number" id="dist" name="dist" value="" step="0.01"><br>
+
+                <div class="btn">
+                    <button class="submit" type="submit" onclick="afterSubmit(event)">Submit</button>
+                    <button class="sample" onclick="sampleValues(event),fetchFuelPrices()">Sample Parameters</button>
+                    <button class="reset" type="reset" onclick="reset()">Reset Form!</button>
+                </div>
+            </form>
+        </div>
+        
+        <div class="result">
+            <h1>Results</h1>
+            <div class="piecharts">
+                <canvas id="petrol" width="10" height="10"></canvas>
+                <p>Here, we can see the distribution of costs for both Petrol Vehicles and Electric Vehicles. 
+                    This distribution can be used to get the bigger picture on how the total investment 
+                    diverges into various costs when invested in either of the available options.
+                </p>
+                <canvas id="ev" width="10" height="10"></canvas>
+            </div>
+            <div class="linechart">
+                <p>Direct Comparison of Accumulated costs.</p>
+                <canvas id="line" width="20" height="10"></canvas>
+                <p>Here, we can observe the costs over the years. This gives us a general idea 
+                    of the accumulated costs over the years. This view helps us get a head on 
+                    comparison by showing the expected costs side by side. <i>*Here, we took the 
+                    current fuel prices into consideration for the upcoming years without 
+                    any consideration for any sort of inflation so a slight change although 
+                    negligible is to be expected.</i>
+                </p>
+            </div>
+            <div class="down">
+                <button id="dp" onclick="dp()">Download Pie Chart of Petrol Vehicle &#11123;</button>
+                <button id="de" onclick="de()">Download Pie Chart of Electric Vehicle &#11123;</button>
+                <button id="dl" onclick="dl()">Download Line Chart &#11123;</button>
+                <button id="da" onclick="dp(),de(),dl()">Download All Charts &#11123;</button>
+            </div>
+        </div>
+    </div>
+    <div class="ref" id="ref">
+        <h2>Learn more about <mark>EVs</mark> by clickng the following links</h2>
+        <a href="https://en.wikipedia.org/wiki/Electric_vehicle">What is an EV? &#9754;</a>
+        <a href="https://afdc.energy.gov/vehicles/how-do-all-electric-cars-work">How do all-electric cars work? &#9754;</a>
+        <a href="https://e-amrit.niti.gov.in/types-of-electric-vehicles">Types of EVs &#9754;</a>
+        <a href="https://www.iea.org/energy-system/transport/electric-vehicles">More from International Energy Agency &#9754;</a>
+    </div>
+</body>
+</html>
